@@ -1,0 +1,42 @@
+defaultTasks 'clean', 'test', 'aggregate','reports'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.4.4")
+        classpath("net.serenity-bdd:serenity-single-page-report:2.4.4")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator' // Este plugin permite agregar los reportes
+
+dependencies {
+    implementation 'net.serenity-bdd:serenity-core:2.4.4'
+    implementation 'net.serenity-bdd:serenity-junit:1.9.9'
+    implementation 'net.serenity-bdd:serenity-cucumber6:2.4.4'
+    implementation 'net.serenity-bdd:serenity-screenplay:2.4.4'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:2.4.4'
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:2.4.4'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.9.1'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.7'
+}
+
+test {
+    systemProperties System.getProperties()
+}
